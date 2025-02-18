@@ -179,6 +179,8 @@ ENV C_INCLUDE_PATH="${INTEL_MKL_HOME}/include:${C_INCLUDE_PATH}"
 ENV CPLUS_INCLUDE_PATH="${INTEL_MKL_HOME}/include:${CPLUS_INCLUDE_PATH}"
 ENV CMAKE_INCLUDE_PATH="${INTEL_MKL_HOME}/include:${CMAKE_INCLUDE_PATH}"
 
+ENV FLASH_ATTENTION_FORCE_BUILD=TRUE
+
 COPY requirements-vllm-cuda.txt requirements-vllm-cuda.txt
 RUN source ${VIRTUAL_ENV}/bin/activate \
     && if [ "${INSTRUCTLAB_VERSION}" != "" ] ; then \

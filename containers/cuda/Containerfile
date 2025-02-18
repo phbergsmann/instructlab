@@ -179,15 +179,13 @@ ENV C_INCLUDE_PATH="${INTEL_MKL_HOME}/include:${C_INCLUDE_PATH}"
 ENV CPLUS_INCLUDE_PATH="${INTEL_MKL_HOME}/include:${CPLUS_INCLUDE_PATH}"
 ENV CMAKE_INCLUDE_PATH="${INTEL_MKL_HOME}/include:${CMAKE_INCLUDE_PATH}"
 
-ENV FLASH_ATTENTION_FORCE_BUILD=TRUE
-
 COPY requirements-vllm-cuda.txt requirements-vllm-cuda.txt
 RUN source ${VIRTUAL_ENV}/bin/activate \
     && if [ "${INSTRUCTLAB_VERSION}" != "" ] ; then \
         INSTRUCTLAB_PKG="${INSTRUCTLAB_PKG}==${INSTRUCTLAB_VERSION}" ; \
     fi \
     && pip install torch psutil \
-    && pip install flash_attn --no-build-isolation \
+    && pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.3cxx11abiFALSE-cp311-cp311-linux_x86_64.whl --no-build-isolation \
     && pip install "${INSTRUCTLAB_PKG}" -C cmake.args="-DGGML_CUDA=on" -C cmake.args="-DGGML_NATIVE=off" \
     && pip install -r requirements-vllm-cuda.txt \
     && rm requirements-vllm-cuda.txt

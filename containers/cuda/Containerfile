@@ -246,5 +246,7 @@ ENTRYPOINT ["/bin/bash"]
 
 RUN chown -R 1001:0 $APP_ROOT \
     && chmod -R g=u $APP_ROOT
+RUN chown -R 1001:0 /instructlab \
+    && chmod -R g=u /instructlab
 
 USER 1001

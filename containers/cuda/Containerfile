@@ -243,3 +243,8 @@ ENV CMAKE_INCLUDE_PATH="${PYTORCH_VISION_HOME}/include:${CMAKE_INCLUDE_PATH}"
 
 WORKDIR /instructlab
 ENTRYPOINT ["/bin/bash"]
+
+RUN chown -R 1001:0 $APP_ROOT \
+    && chmod -R g=u $APP_ROOT
+
+USER 1001
